@@ -1,0 +1,37 @@
+
+!rtr01
+configure terminal
+    hostname rtr01
+    interface lo0
+        ip address 10.1.1.1 255.255.255.255
+    interface g0/2
+        ip address 10.1.2.1 255.255.255.252
+        no shutdown
+    interface g0/1
+        ip address 10.56.240.1 255.255.255.0
+        no shutdown
+    ip route 10.216.175.0 255.255.255.0 10.1.2.2
+    ip route 10.2.2.2 255.255.255.255 10.1.2.2
+    do write
+exit
+show ip int bri
+
+
+
+!rtr02
+configure terminal
+    hostname rtr02
+    interface lo0
+        ip address 10.2.2.2 255.255.255.255
+    interface g0/2
+        ip address 10.1.2.2 255.255.255.252
+        no shutdown
+    interface g0/1
+        ip address 10.216.175.1 255.255.255.0
+        no shutdown
+    ip route 10.1.1.1 255.255.255.255 10.1.2.1
+    ip route 10.56.240.0 255.255.255.0 10.1.2.1
+    do write
+exit
+show ip int bri
+

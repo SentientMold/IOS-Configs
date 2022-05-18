@@ -1,0 +1,16 @@
+enable 
+configure terminal 
+  no ip domain-lookup
+  username Cisco secret Cisco 
+  enable secret Cisco 
+  service password-encryption
+  line con 0
+    loggin sync
+    login local
+  line vty 0 4
+    loggin sync
+    login local
+  do write
+exit 
+exit
+
